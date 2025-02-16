@@ -6,12 +6,7 @@ import tsconfigPaths from "vite-tsconfig-paths";
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [
-    checker({ typescript: true }),
-    tsconfigPaths(),
-    react(),
-    svgr(),
-  ],
+  plugins: [checker({ typescript: true }), tsconfigPaths(), react(), svgr()],
   server: {
     open: true,
     host: "0.0.0.0",

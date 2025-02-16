@@ -1,3 +1,5 @@
+import "@app/App.scss";
+
 function App() {
   return <>hello</>;
 }

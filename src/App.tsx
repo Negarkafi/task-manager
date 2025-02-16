@@ -1,7 +1,6 @@
 import "@app/App.scss";
+import { TaskManager } from "@app/features/task-manager/TaskManager";
 
-function App() {
-  return <>hello</>;
-}
-
-export default App;
+export const App = () => {
+  return <TaskManager />;
+};

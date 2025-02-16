@@ -1,0 +1,132 @@
+$color-dark-900: rgb(14, 35, 56);
+$color-dark-800: rgb(15, 30, 47);
+$color-dark-700: rgb(27 52 77);
+$color-primary-700: rgb(59 130 246);
+
+$container-width: 1200px;
+$container-padding: 16px;
+$container-border-radius: 10px;
+$container-height-reduction: 100px;
+
+%centered-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.task-manager {
+    &__wrapper {
+        @extend %centered-flex;
+        height: 100vh;
+        width: 100%;
+        background-color: $color-dark-800;
+    }
+
+    &__container {
+        flex-direction: column;
+        background-color: $color-dark-700;
+        max-width: 90%;
+        width: $container-width;
+        height: calc(100% - #{$container-height-reduction});
+        border-radius: $container-border-radius;
+        padding: $container-padding;
+        overflow: hidden;
+    }
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__title {
+        color: #fff;
+        font-size: 30px;
+    }
+
+    &__add-task {
+        background-color: $color-primary-700;
+        color: #fff;
+        padding: 10px 15px;
+        border-radius: 6px;
+        font-size: 18px;
+        border: none;
+        cursor: pointer;
+    }
+
+    &__task-list{
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin: 20px 0;
+        padding: 10px;
+        overflow-y: auto;
+        max-height: calc(100% - 70px);
+    }
+
+    &__task-item{
+        position: relative;
+        display: flex;
+        height: 120px;
+        padding: 10px;
+        border-radius: 6px;
+        background-color: $color-dark-900;
+        gap: 15px;
+        color: #fff;
+    }
+
+    &__task-actions{
+        position:absolute;
+        display: flex;
+        gap: 5px;
+        right: 10px;
+        top: 10px;
+
+    }
+
+    &__task-action{
+        @extend %centered-flex;
+        border-radius: 6px;
+        padding: 5px;
+        background-color: #fff;
+        cursor: pointer;
+
+        &--green {
+            background-color: rgb(56 203 110/0.2);
+            color: rgb(56 203 110);
+
+            &:hover{
+                background-color: rgb(56 203 110/0.4);
+            }
+        }
+
+        &--red {
+            background-color: rgb(255 45 32/0.2);
+            color: rgb(255 45 32);
+
+            &:hover{
+                background-color: rgb(255 45 32/0.4);
+            }
+        }
+    }
+
+    &__task-img{
+        max-width: 100%;
+        height: 120px;
+        border-radius: 6px;
+        
+    }
+
+    &__task-title {
+        margin-top: 5px;
+        font-size: 24px;
+        color: $color-primary-700;
+        font-weight: 600;
+    }
+
+    &__task-description {
+        font-size: 18px;
+        line-height: 1.8;
+        margin-top: 12px;
+    }
+
+}

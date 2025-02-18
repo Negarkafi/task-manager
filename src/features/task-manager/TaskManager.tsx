@@ -1,5 +1,5 @@
-import { TaskManagerHeader } from "@app/features/task-manager/TaskManagerHeader";
-import { TaskManagerList } from "@app/features/task-manager/TaskManagerList";
+import { TaskManagerHeader } from "@app/features/task-manager/components/TaskManagerHeader";
+import { TaskManagerList } from "@app/features/task-manager/components/TaskManagerList";
 
 export const TaskManager = () => {
   return (

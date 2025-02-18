@@ -29,6 +29,115 @@ $container-height-reduction: 100px;
   height: 8px;
 }
 
+.modal-overlay {
+  @extend %centered-flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+}
+
+.modal {
+  background-color: $color-dark-700;
+  color: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  width: 500px;
+  max-width: calc(100% - 100px);
+  min-height: 300px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #555;
+  transition: color 0.2s;
+
+  &:hover {
+    color: #fff;
+  }
+}
+
+.modal-body {
+  padding-top: 15px;
+}
+
+.add-or-edit-task {
+  display: flex;
+  flex-direction: column;
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+  }
+
+  &__form-label {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  &__form-input {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+
+    &--textarea {
+      height: 120px;
+    }
+  }
+
+  .error-message {
+    color: rgb(255 45 32);
+    font-size: 14px;
+    margin-top: 5px;
+  }
+
+  &__form-submit {
+    background-color: $color-primary-700;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 6px;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 5px;
+
+    &:disabled {
+      background-color: rgb(59 130 246 / 0.3);
+      color: #ccc;
+      cursor: not-allowed;
+    }
+  }
+}
+
 .task-manager {
   &__wrapper {
     @extend %centered-flex;

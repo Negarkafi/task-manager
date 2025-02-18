@@ -1,13 +1,12 @@
-import { RootState } from "@app/app/hooks";
+import type { RootState } from "@app/app/hooks";
 import type { Task } from "@app/features/task-manager/interfaces/task";
+import type { EntityState } from "@reduxjs/toolkit";
 
 import taskAPI from "@app/features/task-manager/services/taskAPI";
 import {
   createAsyncThunk,
   createEntityAdapter,
   createSlice,
-  EntityId,
-  EntityState,
 } from "@reduxjs/toolkit";
 
 export const fetchAllTasks = createAsyncThunk(
@@ -20,7 +19,7 @@ export const fetchAllTasks = createAsyncThunk(
 
 export const createTask = createAsyncThunk(
   "tasks/createTask",
-  async (task: Task, thunkAPI) => {
+  async (task: Partial<Task>, thunkAPI) => {
     const response = await taskAPI.createTask({
       signal: thunkAPI.signal,
       ...task,
@@ -31,7 +30,7 @@ export const createTask = createAsyncThunk(
 
 export const updateTask = createAsyncThunk(
   "tasks/updateTask",
-  async (task: Task, thunkAPI) => {
+  async (task: Partial<Task>, thunkAPI) => {
     const response = await taskAPI.updateTask({
       signal: thunkAPI.signal,
       ...task,
@@ -51,11 +50,13 @@ export const deleteTask = createAsyncThunk(
 export const tasksAdapter = createEntityAdapter<Task>();
 
 interface TaskState extends EntityState<Task, Task["id"]> {
+  addOrEditTaskLoading: boolean;
   loading: "failed" | "idle" | "pending" | "succeeded";
 }
 
 const initialState: TaskState = tasksAdapter.getInitialState({
   loading: "idle",
+  addOrEditTaskLoading: false,
 });
 
 export const taskSlice = createSlice({
@@ -73,12 +74,26 @@ export const taskSlice = createSlice({
     builder.addCase(fetchAllTasks.rejected, (state) => {
       state.loading = "failed";
     });
+    builder.addCase(createTask.pending, (state) => {
+      state.addOrEditTaskLoading = true;
+    });
     builder.addCase(createTask.fulfilled, (state, { payload }) => {
+      state.addOrEditTaskLoading = false;
       tasksAdapter.addOne(state, payload);
     });
+    builder.addCase(createTask.rejected, (state) => {
+      state.addOrEditTaskLoading = false;
+    });
+    builder.addCase(updateTask.pending, (state) => {
+      state.addOrEditTaskLoading = true;
+    });
     builder.addCase(updateTask.fulfilled, (state, { payload }) => {
+      state.addOrEditTaskLoading = false;
       const { id, ...changes } = payload;
       tasksAdapter.updateOne(state, { id, changes });
+    });
+    builder.addCase(updateTask.rejected, (state) => {
+      state.addOrEditTaskLoading = false;
     });
     builder.addCase(deleteTask.fulfilled, (state, { payload }) => {
       tasksAdapter.removeOne(state, payload.id);

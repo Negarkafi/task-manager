@@ -19,7 +19,7 @@ const createTask = async ({
   signal,
   title,
   description,
-}: Omit<Task, "id" | "image"> & TaskAPI) => {
+}: Partial<Task> & TaskAPI) => {
   const response = await fetch(ENDPOINT, {
     method: "POST",
     headers: {
@@ -42,7 +42,7 @@ const updateTask = async ({
   signal,
   title,
   description,
-}: Omit<Task, "image"> & TaskAPI) => {
+}: Partial<Task> & TaskAPI) => {
   const response = await fetch(`${ENDPOINT}/${id}`, {
     method: "PUT",
     headers: {

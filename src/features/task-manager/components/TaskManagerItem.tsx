@@ -1,20 +1,35 @@
 import type { Task } from "@app/features/task-manager/interfaces/task";
 
+import { useAppDispatch } from "@app/app/hooks";
 import { DeleteIcon } from "@app/components/icons/DeleteIcon";
 import { EditIcon } from "@app/components/icons/EditIcon";
-import { useAppDispatch } from "@app/app/hooks";
-import { deleteTask } from "../taskSlice";
+import { deleteTask } from "@app/features/task-manager/taskSlice";
 
-export const TaskManagerItem = ({ description, id, image, title }: Task) => {
+export const TaskManagerItem = ({
+  description,
+  id,
+  image,
+  title,
+  onEditTask,
+}: Task & { onEditTask: (taskId: string) => void }) => {
   const dispatch = useAppDispatch();
 
   const onDelete = () => {
     void dispatch(deleteTask(id));
   };
+
+  const onEdit = () => {
+    onEditTask(id);
+  };
+
   return (
     <div className="task-manager__task-item">
       <div className="task-manager__task-actions">
-        <span className="task-manager__task-action task-manager__task-action--green">
+        <span
+          className="task-manager__task-action task-manager__task-action--green"
+          onClick={onEdit}
+          onKeyDown={onEdit}
+        >
           <EditIcon />
         </span>
         <span

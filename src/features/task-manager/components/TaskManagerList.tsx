@@ -1,6 +1,6 @@
-import { useAppDispatch, useAppSelector } from '@app/app/hooks';
+import { useAppSelector } from '@app/app/hooks';
 import { TaskManagerItem } from '@app/features/task-manager/components/TaskManagerItem';
-import { fetchAllTasks, selectAllTasks } from '@app/features/task-manager/taskSlice';
+import { selectAllTasks } from '@app/features/task-manager/taskSlice';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 interface Props {
@@ -11,15 +11,10 @@ const itemHeight = 170;
 const buffer = 3;
 
 export const TaskManagerList = ({ onEditTask }: Props) => {
-  const dispatch = useAppDispatch();
   const tasks = useAppSelector(selectAllTasks);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const [visiblity, setVisiblity] = useState<{ start: number; end: number }>({ start: 0, end: 10 });
-
-  useEffect(() => {
-    void dispatch(fetchAllTasks());
-  }, [dispatch]);
 
   const handleScroll = useCallback(() => {
     if (!containerRef.current) return;

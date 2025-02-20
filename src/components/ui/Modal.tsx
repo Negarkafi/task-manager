@@ -1,6 +1,6 @@
 import type { FC, ReactNode } from 'react';
 
-import '@app/components/ui/Modal.scss';
+import '@app/components/ui/modal.scss';
 
 interface ModalProps {
   isOpen: boolean;

@@ -31,7 +31,9 @@ export const deleteTask = createAsyncThunk('tasks/deleteTask', async (id: string
   return response;
 });
 
-export const tasksAdapter = createEntityAdapter<Task>();
+export const tasksAdapter = createEntityAdapter<Task>({
+  sortComparer: (a, b) => Number(b.id) - Number(a.id),
+});
 
 interface TaskState extends EntityState<Task, Task['id']> {
   addOrEditTaskLoading: boolean;

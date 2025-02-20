@@ -15,8 +15,7 @@ export const TaskManagerList = ({ onEditTask }: Props) => {
   const tasks = useAppSelector(selectAllTasks);
 
   const containerRef = useRef<HTMLDivElement>(null);
-  const [visibleStart, setVisibleStart] = useState(0);
-  const [visibleEnd, setVisibleEnd] = useState(10);
+  const [visiblity, setVisiblity] = useState<{ start: number; end: number }>({ start: 0, end: 10 });
 
   useEffect(() => {
     void dispatch(fetchAllTasks());
@@ -30,8 +29,7 @@ export const TaskManagerList = ({ onEditTask }: Props) => {
     const startIndex = Math.max(0, Math.floor(scrollTop / itemHeight) - buffer);
     const endIndex = Math.min(tasks.length, Math.ceil((scrollTop + containerHeight) / itemHeight) + buffer);
 
-    setVisibleStart(startIndex);
-    setVisibleEnd(endIndex);
+    setVisiblity({ start: startIndex, end: endIndex });
   }, [tasks.length]);
 
   useEffect(() => {
@@ -45,12 +43,12 @@ export const TaskManagerList = ({ onEditTask }: Props) => {
   return (
     <section className="task-manager__task-list" ref={containerRef}>
       <div style={{ height: `${tasks.length * itemHeight}px`, position: 'relative' }}>
-        {tasks.slice(visibleStart, visibleEnd).map((task, index) => (
+        {tasks.slice(visiblity.start, visiblity.end).map((task, index) => (
           <div
             key={task.id}
             style={{
               position: 'absolute',
-              top: `${(visibleStart + index) * itemHeight}px`,
+              top: `${(visiblity.start + index) * itemHeight}px`,
               width: '100%',
             }}
           >

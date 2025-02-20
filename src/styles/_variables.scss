@@ -1,0 +1,10 @@
+$color-dark-900: rgb(14, 35, 56);
+$color-dark-800: rgb(15, 30, 47);
+$color-dark-700: rgb(27 52 77);
+$color-primary-700: rgb(59 130 246);
+
+%centered-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

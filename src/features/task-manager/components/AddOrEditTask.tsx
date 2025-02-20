@@ -6,6 +6,7 @@ import { createTask, selectTaskById, updateTask } from '@app/features/task-manag
 import { useFormik } from 'formik';
 import { useState } from 'react';
 import * as Yup from 'yup';
+import '@app/features/task-manager/components/addOrEditTask.scss';
 
 export interface AddOrEditTaskProps {
   isOpen: boolean;

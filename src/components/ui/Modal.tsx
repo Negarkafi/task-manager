@@ -1,5 +1,7 @@
 import type { FC, ReactNode } from 'react';
 
+import '@app/components/ui/Modal.scss';
+
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;

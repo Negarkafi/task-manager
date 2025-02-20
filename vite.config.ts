@@ -1,4 +1,5 @@
 import react from '@vitejs/plugin-react';
+import path from 'path';
 import { defineConfig } from 'vite';
 import checker from 'vite-plugin-checker';
 import svgr from 'vite-plugin-svgr';
@@ -12,4 +13,9 @@ export default defineConfig({
     host: '0.0.0.0',
   },
   envPrefix: 'APP_',
+  resolve: {
+    alias: {
+      '@app': path.resolve(__dirname, 'src'),
+    },
+  },
 });

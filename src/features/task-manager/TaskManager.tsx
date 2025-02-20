@@ -4,6 +4,7 @@ import { AddOrEditTask } from '@app/features/task-manager/components/AddOrEditTa
 import { TaskManagerHeader } from '@app/features/task-manager/components/TaskManagerHeader';
 import { TaskManagerList } from '@app/features/task-manager/components/TaskManagerList';
 import { useState } from 'react';
+import '@app/features/task-manager/taskManager.scss';
 
 export const TaskManager = () => {
   const [addOrEditTask, setAddOrEditTask] = useState<Omit<AddOrEditTaskProps, 'onClose'>>({

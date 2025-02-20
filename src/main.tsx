@@ -3,9 +3,13 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import '@app/Index.scss';
 
-// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-);
+const container = document.getElementById('root');
+if (container) {
+  createRoot(container).render(
+    <StrictMode>
+      <App />
+    </StrictMode>,
+  );
+} else {
+  throw 'Root element not found!';
+}

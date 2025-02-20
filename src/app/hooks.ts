@@ -1,6 +1,6 @@
-import type { store } from "@app/app/store";
+import type { store } from '@app/app/store';
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

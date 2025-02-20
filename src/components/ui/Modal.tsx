@@ -1,4 +1,4 @@
-import type { FC, ReactNode } from "react";
+import type { FC, ReactNode } from 'react';
 
 interface ModalProps {
   isOpen: boolean;
@@ -12,11 +12,7 @@ const Modal: FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
 
   return (
     <div className="modal-overlay" onClick={onClose} onKeyDown={onClose}>
-      <div
-        className="modal"
-        onClick={(e) => e.stopPropagation()}
-        onKeyDown={(e) => e.stopPropagation()}
-      >
+      <div className="modal" onClick={e => e.stopPropagation()} onKeyDown={e => e.stopPropagation()}>
         <div className="modal-header">
           <h2>{title}</h2>
           <button className="modal-close" type="button" onClick={onClose}>

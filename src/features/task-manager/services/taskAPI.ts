@@ -1,6 +1,6 @@
-import type { Task } from "@app/features/task-manager/interfaces/task";
+import type { Task } from '@app/features/task-manager/interfaces/task';
 
-const ENDPOINT = "https://6166c3df13aa1d00170a66b9.mockapi.io/tasks";
+const ENDPOINT = 'https://6166c3df13aa1d00170a66b9.mockapi.io/tasks';
 
 interface TaskAPI {
   signal: AbortSignal | null | undefined;
@@ -15,38 +15,29 @@ const fetchAllTasks = async ({ signal }: TaskAPI) => {
   return data as Task[];
 };
 
-const createTask = async ({
-  signal,
-  title,
-  description,
-}: Partial<Task> & TaskAPI) => {
+const createTask = async ({ signal, title, description }: Partial<Task> & TaskAPI) => {
   const response = await fetch(ENDPOINT, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({ title, description }),
     signal,
   });
 
   if (!response.ok) {
-    throw new Error("Failed to create task");
+    throw new Error('Failed to create task');
   }
 
   const data = await response.json();
   return data as Task;
 };
 
-const updateTask = async ({
-  id,
-  signal,
-  title,
-  description,
-}: Partial<Task> & TaskAPI) => {
+const updateTask = async ({ id, signal, title, description }: Partial<Task> & TaskAPI) => {
   const response = await fetch(`${ENDPOINT}/${id}`, {
-    method: "PUT",
+    method: 'PUT',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({ title, description }),
     signal,
@@ -60,13 +51,13 @@ const updateTask = async ({
   return data as Task;
 };
 
-const deleteTask = async ({ signal, id }: Pick<Task, "id"> & TaskAPI) => {
+const deleteTask = async ({ signal, id }: Pick<Task, 'id'> & TaskAPI) => {
   if (!id) {
-    throw new Error("Task ID is required for deletion");
+    throw new Error('Task ID is required for deletion');
   }
 
   const response = await fetch(`${ENDPOINT}/${id}`, {
-    method: "DELETE",
+    method: 'DELETE',
     signal,
   });
 

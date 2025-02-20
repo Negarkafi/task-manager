@@ -1,7 +1,7 @@
-import { useAppDispatch, useAppSelector } from "@app/app/hooks";
-import { TaskManagerItem } from "@app/features/task-manager/components/TaskManagerItem";
-import { fetchAllTasks, selectAllTasks } from "../taskSlice";
-import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from '@app/app/hooks';
+import { TaskManagerItem } from '@app/features/task-manager/components/TaskManagerItem';
+import { fetchAllTasks, selectAllTasks } from '@app/features/task-manager/taskSlice';
+import { useEffect } from 'react';
 
 interface Props {
   onEditTask: (taskId: string) => void;
@@ -17,10 +17,8 @@ export const TaskManagerList = ({ onEditTask }: Props) => {
 
   return (
     <section className="task-manager__task-list">
-      {tasks.map((task) => {
-        return (
-          <TaskManagerItem key={task.id} {...task} onEditTask={onEditTask} />
-        );
+      {tasks.map(task => {
+        return <TaskManagerItem key={task.id} {...task} onEditTask={onEditTask} />;
       })}
     </section>
   );
